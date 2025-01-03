@@ -22,11 +22,11 @@ builder.Services.AddSwaggerGen(c =>
 	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
 		Name = "Authorization",
-		In = ParameterLocation.Header,
 		Type = SecuritySchemeType.ApiKey,
-		Scheme = "bearer",
+		Scheme = "Bearer",
 		BearerFormat = "JWT",
-		Description = "Enter JWT Bearer token"
+		In = ParameterLocation.Header,
+		Description = "Enter 'Bearer' [space] and your token."
 	});
 	c.AddSecurityRequirement(new OpenApiSecurityRequirement
 		{
@@ -81,6 +81,11 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
 var app = builder.Build();
+
+app.UseCors(builder =>
+	builder.AllowAnyOrigin()
+		   .AllowAnyMethod()
+		   .AllowAnyHeader());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
