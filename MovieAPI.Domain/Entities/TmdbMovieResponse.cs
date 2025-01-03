@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MovieAPI.Domain.Entities
 {
-	public class MovieResponse
+	public class TmdbMovieResponse
 	{
-		public IEnumerable<Movie> Results { get; set; }
+		public List<TmdbMovie> Results { get; set; }
 	}
 }

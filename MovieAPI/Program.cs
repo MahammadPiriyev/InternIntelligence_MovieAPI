@@ -77,15 +77,12 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITmdbService, TmdbService>();
+builder.Services.AddHttpClient<ITmdbService, TmdbService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
 var app = builder.Build();
-
-app.UseCors(builder =>
-	builder.AllowAnyOrigin()
-		   .AllowAnyMethod()
-		   .AllowAnyHeader());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
